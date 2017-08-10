@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration monitorInterval="60">
+	<Properties>
+	    <Property name="log-path">C:\\Users\\70003\\Desktop\\Temp\\logs</Property>
+	    <Property name="archive">${log-path}/archive</Property>
+	</Properties>
+	
+	<appenders>
+	    <console name="Console-Appender" target="SYSTEM_OUT">
+	        <PatternLayout>
+	            <pattern>
+	                [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
+	            </pattern>
+	        </PatternLayout>
+	    </console> 
+	    <rollingFile name="RollingFile-Appender"
+	                 fileName="${log-path}/rollingfile.log"
+	                 filePattern="${archive}/rollingfile.log.%d{yyyy-MM-dd-hh-mm}.gz">
+		    <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"/>
+		    <Policies>
+		         <TimeBasedTriggeringPolicy/>
+		         <SizeBasedTriggeringPolicy size="10 MB"/>
+		    </Policies>
+		    <DefaultRolloverStrategy max="30"/>
+	    </rollingFile>      
+	</appenders>
+	
+	<loggers>
+	    <logger name="umbrella" level="info" additivity="false">
+	        <!-- <appenderRef ref="RollingFile-Appender"/> -->
+	        <appenderRef ref="Console-Appender"/>
+	    </logger>
+	    <!-- <logger name="org.springframework.security" level="debug" additivity="false">
+	    	<appenderRef ref="RollingFile-Appender"/>
+	    </logger> -->
+	    <!-- <logger name="org.springframework.aop" level="debug" additivity="false">
+	    	<appenderRef ref="RollingFile-Appender"/>
+	    </logger> -->
+	    <!-- <root level="info">
+	        <appenderRef ref="Console-Appender"/>
+	    </root> -->
+    </loggers>
+</configuration>

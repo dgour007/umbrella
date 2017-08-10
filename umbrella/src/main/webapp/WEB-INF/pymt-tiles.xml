@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	
+	<!-- Template Definition -->
+	<definition name="general.template" template="/WEB-INF/views/template/template.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/template/header_2_columns.jsp"/>
+		<put-attribute name="menu" value="/WEB-INF/views/template/menu.jsp"/>
+		<put-attribute name="messages" value="/WEB-INF/views/template/message.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/template/blank.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
+		<put-attribute name="title" value="Payments" type="String"/>
+	</definition>
+	
+	<!-- Login Page View -->
+	<definition name="tiles.login" extends="general.template">
+		<put-attribute name="header" value="/WEB-INF/views/template/header_1_column.jsp"/>
+		<put-attribute name="menu" value="/WEB-INF/views/template/blank.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/login.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/template/blank.jsp"/>
+		<put-attribute name="title" value="Payments - Login"/>
+	</definition>
+	
+	<!-- Welcome Page View -->
+	<definition name="tiles.home" extends="general.template">
+		<put-attribute name="content" value="/WEB-INF/views/home.jsp"/>
+		<put-attribute name="title" value="Payments - Home"/>
+	</definition>
+	
+	<!-- Access Denied Page View -->
+	<definition name="tiles.access.denied" template="/WEB-INF/views/access_denied.jsp">
+	</definition>
+	
+</tiles-definitions>
