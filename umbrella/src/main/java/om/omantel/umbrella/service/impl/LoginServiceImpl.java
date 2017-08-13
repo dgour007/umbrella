@@ -13,8 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
+import om.omantel.umbrella.bean.Menu;
 import om.omantel.umbrella.bean.Messages;
+import om.omantel.umbrella.bean.User;
 import om.omantel.umbrella.dao.LoginDao;
+import om.omantel.umbrella.security.LdapUser;
+import om.omantel.umbrella.security.LdapUserDetailsContextMapper;
 import om.omantel.umbrella.service.LoginService;
 import om.omantel.umbrella.util.Constants;
 
@@ -27,12 +31,12 @@ import om.omantel.umbrella.util.Constants;
 @Component
 public class LoginServiceImpl implements LoginService {
 
-	/*private LoginDao loginDao;
+	private LoginDao loginDao;
 	
 	@Autowired
 	public LoginServiceImpl (LoginDao loginDao) {
 		this.loginDao = loginDao;
-	}*/
+	}
 	
 	@Override
 	public Messages getInvalidMessage (HttpServletRequest request, MessageSource messageSource) {
@@ -74,6 +78,87 @@ public class LoginServiceImpl implements LoginService {
 	public List<String> getSessionMessage(MessageSource messageSource) {
 		List<String> errorMessages = new ArrayList<String>(0);
 		errorMessages.add(messageSource.getMessage(Constants.ER_111, null,Locale.ENGLISH));
+		return errorMessages;
+	}
+
+	@Override
+	public User getUserDetails(LdapUserDetailsContextMapper contextMapper, String ipAddress) {
+		
+		LdapUser ldapUser = contextMapper.getUserDetails();
+		
+		User user = loginDao.getUserDetails(ldapUser.getUsername(), ipAddress);
+		
+		user.setUserId(ldapUser.getUsername());
+		user.setFullName(ldapUser.getInitials()+" "+ldapUser.getFullName());
+		user.setDepartment(ldapUser.getDepartment());
+		user.seteMailAddress(ldapUser.geteMailAddress());
+		user.setInitials(ldapUser.getInitials());
+		//user.setMobile(ldapUser.getMobile());
+		
+		return user;
+	}
+
+	@Override
+	public List<Menu> getUserMenu(int roleId, int appId) {
+		
+		List<Menu> menuList = loginDao.getMenu(roleId, appId);
+		List<Menu> titleMenuList = new ArrayList<>(0);
+		
+		for (Menu titleMenu : menuList) {
+			if (titleMenu.getParentMenuId() == 0) {
+				
+				int titleMenuId = titleMenu.getMenuId();
+				List<Menu> menuListLevel1 = new ArrayList<>(0);
+				
+				for (Menu menuLevel1 : menuList) {
+					
+					if (menuLevel1.getParentMenuId() == titleMenuId) {
+						
+						int menuIdLevel1 = menuLevel1.getMenuId();
+						List<Menu> menuListLevel2 = new ArrayList<>(0);
+						
+						for (Menu menuLevel2 : menuList) {
+							
+							if (menuLevel2.getParentMenuId() == menuIdLevel1) {
+								
+								int menuIdLevel2 = menuLevel2.getMenuId();
+								List<Menu> menuListLevel3 = new ArrayList<>(0);
+								
+								for (Menu menuLevel3 : menuList) {
+									
+									if (menuLevel3.getParentMenuId() == menuIdLevel2) {
+										menuListLevel3.add(menuLevel3);
+										//menuList.remove(menuLevel3);
+									}
+								}
+								menuLevel2.setChildMenu(menuListLevel3);
+								menuListLevel2.add(menuLevel2);
+								//menuList.remove(menuLevel2);
+							}
+						}
+						menuLevel1.setChildMenu(menuListLevel2);
+						menuListLevel1.add(menuLevel1);
+						//menuList.remove(menuLevel1);
+					}
+				}
+				titleMenu.setChildMenu(menuListLevel1);
+				titleMenuList.add(titleMenu);
+				//menuList.remove(titleMenu);
+			}
+		}
+		
+		return titleMenuList;
+	}
+
+	@Override
+	public int updateTheme(String userId, String theme) {
+		return loginDao.updateTheme(userId, theme);
+	}
+
+	@Override
+	public List<String> getNoRoleMessage(MessageSource messageSource) {
+		List<String> errorMessages = new ArrayList<String>();
+		errorMessages.add(messageSource.getMessage(Constants.ER_102, null, Locale.ENGLISH));
 		return errorMessages;
 	}
 }

@@ -5,68 +5,70 @@
 
 </head>
 <body>
-
-	<!-- main menu-->
+	<c:set var="tmenu" value="${menu}" scope="session" />
+	<c:set var="activemenuid" value="${activemenu}" scope="session" />
+	
 	<div data-scroll-to-active="true"
 		class="main-menu menu-fixed menu-${theme} menu-accordion menu-shadow">
-		<!-- main menu header-->
-		<!-- <div class="main-menu-header">
+		<div class="main-menu-header">
 			<input type="text" placeholder="Search"
-				class="menu-search form-control round" />
-		</div> -->
-		<!-- / main menu header-->
-		<!-- main menu content-->
+				class="menu-search form-control round"/>
+		</div>
 		<div class="main-menu-content">
-			<ul id="main-menu-navigation" data-menu="menu-navigation"
-				class="navigation navigation-main">
-				<li class="active"><a href="/umbrella/home"><i
-						class="icon-home3"></i><span data-i18n="nav.home.main"
-						class="menu-title">Home</span></a></li>
-				<li class=" nav-item"><a href="#"><i
-						class="icon-stats-dots"></i> <span data-i18n="nav.dash.main"
-						class="menu-title">Dashboards</span><span
-						class="tag tag tag-primary tag-pill float-xs-right mr-2">2</span></a>
-					<ul class="menu-content">
-						<li><a href="index.html" data-i18n="nav.dash.main"
-							class="menu-item">Dashboard 1</a></li>
-						<li><a href="dashboard-2.html" data-i18n="nav.dash.main"
-							class="menu-item">Dashboard 2</a></li>
-					</ul></li>
-				<li class=" nav-item"><a href="#"><i class="icon-table2"></i><span
-						data-i18n="nav.reports.main" class="menu-title">Reports</span></a>
-					<ul class="menu-content">
-						<li><a href="#" data-i18n="nav.reports.second_level"
-							class="menu-item">Sales</a></li>
-						<li><a href="#"
-							data-i18n="nav.reports.second_level_child.main" class="menu-item">Fixed
-								Inventory</a>
+			<ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
+				<c:forEach items="${tmenu}" var="titleMenu">
+					<li id="${titleMenu.menuId}" class=" nav-item">
+						<a href="${titleMenu.action}">
+							<i class="${titleMenu.iconClass}"></i>
+							<span data-i18n="nav.${titleMenu.menuId}.main" class="menu-title">${titleMenu.menuName}</span>
+						</a>
+						
+						<c:forEach var="menuLevel1" items="${titleMenu.childMenu}">
 							<ul class="menu-content">
-								<li><a href="#"
-									data-i18n="nav.reports.second_level_child.third_level1"
-									class="menu-item">Stock Balance Report</a></li>
-								<li><a href="#"
-									data-i18n="nav.reports.second_level_child.third_level2"
-									class="menu-item">Stock Distribution Report</a></li>
-							</ul></li>
-					</ul></li>
+								<li id="${menuLevel1.menuId}" >
+									<a href="${menuLevel1.action}" data-i18n="nav.${titleMenu.menuId}.second_level.${menuLevel1.menuId}.main" 
+									class="menu-item">${menuLevel1.menuName}</a>
+									
+									<c:forEach var="menuLevel2" items="${menuLevel1.childMenu}">
+										<ul class="menu-content">
+											<li id="${menuLevel2.menuId}">
+												<a href="${menuLevel2.action}" 
+													data-i18n="nav.${titleMenu.menuId}.second_level.${menuLevel1.menuId}.third_level.${menuLevel2.menuId}.main" 
+													class="menu-item">${menuLevel2.menuName}</a>
+													
+												<c:forEach var="menuLevel3" items="${menuLevel2.childMenu}">
+													<ul class="menu-content">
+														<li id="${menuLevel3.menuId}">
+															<a  href="${menuLevel3.action}" 
+																data-i18n="nav.${titleMenu.menuId}.second_level.${menuLevel1.menuId}.third_level.${menuLevel2.menuId}.fourth_level.${menuLevel3.menuId}" 
+																class="menu-item">${menuLevel3.menuName}</a>
+														</li>
+													</ul>
+												</c:forEach>
+											</li>
+										</ul>
+									</c:forEach>
+								</li>
+							</ul>
+						</c:forEach>
+					</li>
+				</c:forEach>
 			</ul>
 		</div>
-		<!-- /main menu content-->
-		<!-- main menu footer-->
-		<!-- include includes/menu-footer-->
-		<!-- main menu footer-->
 	</div>
-	<!-- / main menu-->
-
-	<!-- BEGIN ROBUST JS-->
+	
+	<script type="text/javascript">
+		$(document).ready(
+			function(){
+		    	document.getElementById(${activemenuid}).classList.add('active');
+			});
+	</script>
 	<script
 		src="<%=request.getContextPath()%>/static/app-assets/js/core/app-menu.js"
 		type="text/javascript"></script>
 	<script
 		src="<%=request.getContextPath()%>/static/app-assets/js/core/app.js"
 		type="text/javascript"></script>
-	<!-- END ROBUST JS-->
-	<!-- BEGIN PAGE LEVEL JS-->
-	<!-- END PAGE LEVEL JS-->
+
 </body>
 </html>

@@ -3,12 +3,17 @@
  */
 package om.omantel.umbrella.bean;
 
+import java.util.List;
+
 /**
  * @author Dhiraj Gour
  * @date 04 August 2017
  *
  */
 public class User {
+	
+	private int roleId = 0;
+	private int appId = 0;
 	
 	private String userId = null;
 	private String fullName = null;
@@ -17,7 +22,34 @@ public class User {
 	private String department = null;
 	private String mobile = null;
 	private String theme = null;
+	private String roleDesc = null;
 	
+	List<IdName> appList = null;
+	
+	public int getRoleId() {
+		return roleId;
+	}
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
+	}
+	public String getRoleDesc() {
+		return roleDesc;
+	}
+	public void setRoleDesc(String roleDesc) {
+		this.roleDesc = roleDesc;
+	}
+	public int getAppId() {
+		return appId;
+	}
+	public void setAppId(int appId) {
+		this.appId = appId;
+	}
+	public List<IdName> getAppList() {
+		return appList;
+	}
+	public void setAppList(List<IdName> appList) {
+		this.appList = appList;
+	}
 	public String getTheme() {
 		return theme;
 	}

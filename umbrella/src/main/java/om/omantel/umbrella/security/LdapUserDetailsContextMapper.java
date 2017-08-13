@@ -41,7 +41,7 @@ public class LdapUserDetailsContextMapper extends LdapUserDetailsMapper implemen
 			emailAddress = (String)ctx.getAttributes().get("mail").get(0);
 			initials = (String)ctx.getAttributes().get("initials").get(0);
 			department = (String)ctx.getAttributes().get("department").get(0);
-			mobile = (String)ctx.getAttributes().get("mobile").get(0);
+			//mobile = (String)ctx.getAttributes().get("mobile").get(0);
 			
 			ldapUser = new LdapUser(details, name, emailAddress, initials, department, mobile);
 			this.userDetails = ldapUser;

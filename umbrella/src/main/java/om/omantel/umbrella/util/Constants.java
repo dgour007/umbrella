@@ -13,8 +13,10 @@ public class Constants {
 	
 	public final static String MESSAGES = "messages";
 	public final static String USER = "user";
+	public final static String MENU = "menu";
 	public final static String HEADING = "heading";
 	public final static String CRUMB = "crumb";
+	public final static String ACTIVE_MENU = "activemenu";
 	
 	/*
 	 * EXCEPTIONS
@@ -30,7 +32,7 @@ public class Constants {
 	 * ERROR CODES
 	 */
 	public final static String ER_101 = "error.invalid.credentials";
-	public final static String ER_102 = "error.no.access";
+	public final static String ER_102 = "error.no.role.defined";
 	public final static String ER_103 = "error.technical.problem";
 	public final static String ER_104 = "error.user.not.exist";
 	public final static String ER_105 = "error.invalid.cabin";

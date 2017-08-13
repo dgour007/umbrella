@@ -3,6 +3,11 @@
  */
 package om.omantel.umbrella.dao;
 
+import java.util.List;
+
+import om.omantel.umbrella.bean.Menu;
+import om.omantel.umbrella.bean.User;
+
 /**
  * @author Dhiraj Gour
  * @since 26 July 2017
@@ -10,5 +15,9 @@ package om.omantel.umbrella.dao;
  */
 public interface LoginDao {
 	
-	void testInsert(); 
+	User getUserDetails (String userId, String ipAddress);
+	
+	List<Menu> getMenu (int roleId, int appId);
+	
+	int updateTheme (String userId, String theme);
 }

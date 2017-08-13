@@ -16,7 +16,7 @@ import org.springframework.context.annotation.ImportResource;
 @Configuration
 @Import({UmbConfig.class, UmbTestDBConfig.class, 
 	UmbProdDBConfig.class, UmbSecurityConfig.class})
-@ImportResource("classpath:configurations/pymt-config.xml")
+@ImportResource("classpath:configurations/umbrella-config.xml")
 public class UmbRootConfig {
 
 }

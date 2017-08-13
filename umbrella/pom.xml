@@ -19,6 +19,11 @@
 		<org.springframework.security.version>4.2.3.RELEASE</org.springframework.security.version>
 		<apachetiles.version>3.0.7</apachetiles.version>
 		<log4j2.version>2.5</log4j2.version>
+		
+		<weblogic.adminurl></weblogic.adminurl>
+		<weblogic.user></weblogic.user>
+		<weblogic.password></weblogic.password>
+		<weblogic.remote></weblogic.remote>
 	</properties>
 
 	<dependencies>
@@ -161,11 +166,19 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
-			<plugin>
+			<!-- <plugin>
 				<groupId>com.oracle.weblogic</groupId>
 				<artifactId>weblogic-maven-plugin</artifactId>
 				<version>12.1.1</version>
-			</plugin>
+				
+				<configuration>
+					<adminurl>${weblogic.adminurl}</adminurl>
+					<user>${weblogic.user}</user>
+					<password>${weblogic.password}</password>
+					<source>${project.build.directory}/${project.build.fileName}.${project.packaging}</source>
+					<name>${project.build.fileName}</name>
+				</configuration>
+			</plugin> -->
 		</plugins>
 	</build>
 </project>

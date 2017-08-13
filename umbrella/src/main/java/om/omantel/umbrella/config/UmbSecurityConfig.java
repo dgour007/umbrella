@@ -36,7 +36,7 @@ public class UmbSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()										//authorization
 			.antMatchers("/logon").permitAll()
 			.antMatchers("/login").anonymous()
-			.antMatchers("/log_out").anonymous()
+			.antMatchers("/log_out/**").permitAll()
 			.antMatchers("/invalid").anonymous()
 			.antMatchers("/session").anonymous()
 			.antMatchers("/static/**").permitAll()
@@ -47,13 +47,13 @@ public class UmbSecurityConfig extends WebSecurityConfigurerAdapter {
 			.formLogin()												//login
 			.loginPage("/logon")
 			.loginProcessingUrl("/login")
-			.defaultSuccessUrl("/auth")
+			.defaultSuccessUrl("/auth", true)
 			.failureUrl("/invalid")
 			.and()
 			.logout()													//logout
 			.invalidateHttpSession(true) 								//true by default
 			.logoutUrl("/perform_logout")
-			.logoutSuccessUrl("/log_out")
+			.logoutSuccessUrl("/log_out/x")
 			.deleteCookies("JSESSIONID")
 			.and()
 			.exceptionHandling()										//Exception Handling

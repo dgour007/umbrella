@@ -12,7 +12,7 @@
 		<put-attribute name="messages" value="/WEB-INF/views/template/message.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/views/template/blank.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
-		<put-attribute name="title" value="Payments" type="String"/>
+		<put-attribute name="title" value="Umbrella" type="String"/>
 	</definition>
 	
 	<!-- Login Page View -->
@@ -21,13 +21,13 @@
 		<put-attribute name="menu" value="/WEB-INF/views/template/blank.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/views/login.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/template/blank.jsp"/>
-		<put-attribute name="title" value="Payments - Login"/>
+		<put-attribute name="title" value="Umbrella - Login"/>
 	</definition>
 	
 	<!-- Welcome Page View -->
 	<definition name="tiles.home" extends="general.template">
 		<put-attribute name="content" value="/WEB-INF/views/home.jsp"/>
-		<put-attribute name="title" value="Payments - Home"/>
+		<put-attribute name="title" value="Umbrella - Home"/>
 	</definition>
 	
 	<!-- Access Denied Page View -->

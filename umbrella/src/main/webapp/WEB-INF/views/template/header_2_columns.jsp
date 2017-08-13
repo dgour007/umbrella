@@ -61,6 +61,7 @@
 	
 	<c:set var="fullname" value="${user.getFullName()}" scope="session"/>
 	<c:set var="theme" value="${user.getTheme()}" scope="session"/>
+	<c:set var="appList" value="${user.getAppList()}" scope="session"/>
 	
 	<!-- navbar-fixed-top-->
 	<nav
@@ -138,7 +139,7 @@
 											</div>
 											<div class="media-body">
 												<h6 class="media-heading">Welcome!</h6>
-												<p class="notification-text font-small-3 text-muted">Welcome to the Scoop</p>
+												<p class="notification-text font-small-3 text-muted">Welcome to the Umbrella</p>
 											</div>
 										</div>
 								</a></li>
@@ -164,6 +165,11 @@
 									<i class="icon-check2 icon-bg-circle bg-black bg-accent-3"></i> Dark Theme</a>
 								</c:if>
                   				<div class="dropdown-divider"></div>
+                  					<c:forEach var="app" items="${appList}">
+                  						<a href="/umbrella/menu/${app.id}" class="dropdown-item">
+                  							<i class="${app.value} icon-bg-circle bg-blue bg-accent-3"></i> ${app.name}</a>
+                  						<div class="dropdown-divider"></div>
+                  					</c:forEach>
 								<sform:form name="headerform" action="/umbrella/perform_logout"
 									method="POST">
 									<a href="#" onclick="logout()" class="dropdown-item"><i
