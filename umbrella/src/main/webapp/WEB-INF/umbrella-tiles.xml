@@ -30,6 +30,12 @@
 		<put-attribute name="title" value="Umbrella - Home"/>
 	</definition>
 	
+	<!-- Login Page View -->
+	<definition name="tiles.agency.inv.summary" extends="general.template">
+		<put-attribute name="content" value="/WEB-INF/views/agencyinvsummary.jsp"/>
+		<put-attribute name="title" value="Umbrella - Inventory Summary"/>
+	</definition>
+	
 	<!-- Access Denied Page View -->
 	<definition name="tiles.access.denied" template="/WEB-INF/views/access_denied.jsp">
 	</definition>

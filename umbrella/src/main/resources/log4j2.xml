@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration monitorInterval="60">
 	<Properties>
-	    <Property name="log-path">C:\\Users\\70003\\Desktop\\Temp\\logs</Property>
+	    <Property name="log-path">/omfs/logs/umbrella</Property>
 	    <Property name="archive">${log-path}/archive</Property>
 	</Properties>
 	
@@ -14,11 +14,12 @@
 	        </PatternLayout>
 	    </console> 
 	    <rollingFile name="RollingFile-Appender"
-	                 fileName="${log-path}/rollingfile.log"
-	                 filePattern="${archive}/rollingfile.log.%d{yyyy-MM-dd-hh-mm}.gz">
+	                 fileName="${log-path}/umbrella.log"
+	                 filePattern="${archive}/umbrella.log.%d{yyyy-MM-dd-hh-mm}.gz">
 		    <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"/>
 		    <Policies>
-		         <TimeBasedTriggeringPolicy/>
+		         <TimeBasedTriggeringPolicy interval="24" modulate="true" />
+        		 <OnStartupTriggeringPolicy />
 		         <SizeBasedTriggeringPolicy size="10 MB"/>
 		    </Policies>
 		    <DefaultRolloverStrategy max="30"/>
@@ -26,18 +27,18 @@
 	</appenders>
 	
 	<loggers>
-	    <logger name="umbrella" level="info" additivity="false">
-	        <!-- <appenderRef ref="RollingFile-Appender"/> -->
+	    <!-- <logger name="umbrella" level="debug" additivity="false">
+	        <appenderRef ref="RollingFile-Appender"/>
 	        <appenderRef ref="Console-Appender"/>
-	    </logger>
+	    </logger> -->
 	    <!-- <logger name="org.springframework.security" level="debug" additivity="false">
 	    	<appenderRef ref="RollingFile-Appender"/>
 	    </logger> -->
 	    <!-- <logger name="org.springframework.aop" level="debug" additivity="false">
 	    	<appenderRef ref="RollingFile-Appender"/>
 	    </logger> -->
-	    <!-- <root level="info">
-	        <appenderRef ref="Console-Appender"/>
-	    </root> -->
+	    <root level="debug">
+	        <appenderRef ref="RollingFile-Appender"/>
+	    </root>
     </loggers>
 </configuration>

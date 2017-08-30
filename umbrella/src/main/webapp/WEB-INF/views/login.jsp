@@ -56,7 +56,7 @@
 												</fieldset>
 											</div>
 										</fieldset>
-										<button type="submit" class="btn btn-danger btn-lg btn-block">
+										<button type="submit" class="btn btn-info btn-lg btn-block">
 											<i class="icon-unlock2"></i> Login
 										</button>
 									</sform:form>

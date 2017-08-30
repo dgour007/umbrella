@@ -61,6 +61,7 @@ public class LoginDaoImpl implements LoginDao {
 		                new SqlOutParameter("out_role", Types.INTEGER),
 		                new SqlOutParameter("out_role_desc", Types.VARCHAR),
 		                new SqlOutParameter("out_app", Types.INTEGER),
+		                new SqlOutParameter("out_authority", Types.INTEGER),
 		                new SqlOutParameter("out_error_code", Types.INTEGER),
 		                new SqlOutParameter("out_error_message", Types.VARCHAR),
 		                new SqlOutParameter("out_app_list", OracleTypes.CURSOR, this::mapAppList));
@@ -78,6 +79,7 @@ public class LoginDaoImpl implements LoginDao {
 			user.setRoleId((Integer)out.get("out_role"));
 			user.setAppId((Integer)out.get("out_app"));
 			user.setRoleDesc((String)out.get("out_role_desc"));
+			user.setAuthority((Integer)out.get("out_authority"));
 			user.setAppList((List<IdName>)out.get("out_app_list"));
 		}
 		

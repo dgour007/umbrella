@@ -23,9 +23,23 @@ public class User {
 	private String mobile = null;
 	private String theme = null;
 	private String roleDesc = null;
+	private String ipAddress = null;
+	private int authority = 0;
 	
 	List<IdName> appList = null;
 	
+	public String getIpAddress() {
+		return ipAddress;
+	}
+	public void setIpAddress(String ipAddress) {
+		this.ipAddress = ipAddress;
+	}
+	public int getAuthority() {
+		return authority;
+	}
+	public void setAuthority(int authority) {
+		this.authority = authority;
+	}
 	public int getRoleId() {
 		return roleId;
 	}

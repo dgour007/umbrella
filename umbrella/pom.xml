@@ -19,11 +19,6 @@
 		<org.springframework.security.version>4.2.3.RELEASE</org.springframework.security.version>
 		<apachetiles.version>3.0.7</apachetiles.version>
 		<log4j2.version>2.5</log4j2.version>
-		
-		<weblogic.adminurl></weblogic.adminurl>
-		<weblogic.user></weblogic.user>
-		<weblogic.password></weblogic.password>
-		<weblogic.remote></weblogic.remote>
 	</properties>
 
 	<dependencies>
@@ -163,21 +158,41 @@
 				<configuration>
 					<warSourceDirectory>src/main/webapp</warSourceDirectory>
 					<warName>umbrella</warName>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<verbose>true</verbose>
+					<failOnMissingWebXml>true</failOnMissingWebXml>
 				</configuration>
 			</plugin>
 			<!-- <plugin>
 				<groupId>com.oracle.weblogic</groupId>
-				<artifactId>weblogic-maven-plugin</artifactId>
-				<version>12.1.1</version>
-				
-				<configuration>
-					<adminurl>${weblogic.adminurl}</adminurl>
-					<user>${weblogic.user}</user>
-					<password>${weblogic.password}</password>
-					<source>${project.build.directory}/${project.build.fileName}.${project.packaging}</source>
-					<name>${project.build.fileName}</name>
-				</configuration>
+				<artifactId>wls-maven-plugin</artifactId>
+		        <version>12.1.3.0</version>
+		        <configuration>
+		        	<middlewareHome>C:\oracle\JDV\Middleware1\Oracle_Home\</middlewareHome>
+		        	<weblogicHome>C:\oracle\JDV\Middleware1\Oracle_Home\wlserver</weblogicHome>
+		        	<adminurl>t3://127.0.0.1:7101</adminurl>
+		            <user>weblogic</user>
+		            <password>cmatcs123</password>
+		        </configuration>
+				<executions>
+					<execution>
+			            <id>wls-deploy</id>
+			            <phase>pre-integration-test</phase>
+			            <goals>
+			              <goal>deploy</goal>
+			            </goals>
+			            <configuration>
+			            	<middlewareHome>C:\oracle\JDV\Middleware1\Oracle_Home\</middlewareHome>
+			            	<weblogicHome>C:\oracle\JDV\Middleware1\Oracle_Home\wlserver\</weblogicHome>
+			            	<remote>true</remote>
+			            	<adminurl>t3://127.0.0.1:7101</adminurl>
+				            <user>weblogic</user>
+				            <password>cmatcs123</password>
+							<source>${project.build.directory}/${project.build.finalName}.${project.packaging}</source>
+				            <verbose>true</verbose>
+							<name>${project.build.finalName}</name>
+			            </configuration>
+			         </execution>
+				</executions>
 			</plugin> -->
 		</plugins>
 	</build>

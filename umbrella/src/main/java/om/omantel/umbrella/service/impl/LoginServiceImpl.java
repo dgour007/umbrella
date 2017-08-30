@@ -94,6 +94,7 @@ public class LoginServiceImpl implements LoginService {
 		user.seteMailAddress(ldapUser.geteMailAddress());
 		user.setInitials(ldapUser.getInitials());
 		//user.setMobile(ldapUser.getMobile());
+		user.setIpAddress(ipAddress);
 		
 		return user;
 	}

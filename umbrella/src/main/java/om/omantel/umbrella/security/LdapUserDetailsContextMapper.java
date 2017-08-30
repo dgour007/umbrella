@@ -16,7 +16,8 @@ import org.springframework.security.ldap.userdetails.LdapUserDetailsMapper;
 import org.springframework.security.ldap.userdetails.UserDetailsContextMapper;
 
 /**
- * @author 70003
+ * @author Dhiraj Gour
+ * @date 30 July 2017
  *
  */
 public class LdapUserDetailsContextMapper extends LdapUserDetailsMapper implements UserDetailsContextMapper {

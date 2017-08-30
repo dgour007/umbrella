@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.ldap.userdetails.DefaultLdapAuthoritiesPopulator;
 import org.springframework.security.ldap.userdetails.UserDetailsContextMapper;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
@@ -18,6 +19,8 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
 import om.omantel.umbrella.annotation.ProdProfile;
 import om.omantel.umbrella.annotation.TestProfile;
 import om.omantel.umbrella.security.LdapUserDetailsContextMapper;
+import om.omantel.umbrella.security.UmbUserDetailsService;
+import om.omantel.umbrella.security.UserService;
 
 /**
  * @author Dhiraj Gour
@@ -41,9 +44,9 @@ public class UmbSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/session").anonymous()
 			.antMatchers("/static/**").permitAll()
 			.anyRequest().authenticated()
-			.and()
-			//.requiresChannel().anyRequest().requiresSecure()			//https channel		
 			//.and()
+			//.requiresChannel().anyRequest().requiresSecure()			//https channel		
+			.and()
 			.formLogin()												//login
 			.loginPage("/logon")
 			.loginProcessingUrl("/login")
@@ -66,7 +69,8 @@ public class UmbSecurityConfig extends WebSecurityConfigurerAdapter {
 			//.and() 													//Uncomment this to enable remember me functionality
 			//.rememberMe()												//Remember Me Functionality
 			//.tokenValiditySeconds(2419200)
-			//.key("spittrKey");
+			//.key("spittrKey")
+			//.userDetailsService(userDetailsService());
 			
 		http.sessionManagement().maximumSessions(1);
 	}
@@ -115,6 +119,16 @@ public class UmbSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public HttpSessionEventPublisher httpSessionEventPublisher() {
 	    return new HttpSessionEventPublisher();
+	}
+	
+	@Bean
+	public UserDetailsService userDetailsService() {
+	    return new UmbUserDetailsService();
+	}
+	
+	@Bean
+	public UserService userService() {
+	    return new UserService();
 	}
 	
 	//Sample Code

@@ -3580,8 +3580,8 @@ a.tag:hover {
   border-radius: 0; }
 
 .alert {
-  padding: 0.75rem 1rem;
-  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
   border: 1px solid transparent;
   border-radius: 0.18rem; }
 

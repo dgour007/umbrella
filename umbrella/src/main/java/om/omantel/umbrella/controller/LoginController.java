@@ -58,7 +58,7 @@ public class LoginController {
 		messages = new Messages();
 	}
 	
-	@RequestMapping(value="/logon", method=RequestMethod.GET)
+	@RequestMapping(value= "/logon", method=RequestMethod.GET)
 	public String showLoginPage () {
 		return "tiles.login";
 	}
@@ -72,13 +72,16 @@ public class LoginController {
 	public String getUserDetails (HttpServletRequest request, Model model) {
 		
 		HttpSession session = request.getSession();
-		User user = loginService.getUserDetails(contextMapper, request.getRemoteAddr());
+		String ipAddress = request.getHeader("X-Forwarded-For")!= null ? request.getHeader("X-Forwarded-For") : request.getRemoteAddr();
+		
+		User user = loginService.getUserDetails(contextMapper, ipAddress);
+		
+		logger.info("User trying to login is: '{}' with name: '{}' from the IP: '{}' with rolestatus {} ",
+				user.getUserId(), user.getFullName(), ipAddress, user.getRoleId());
 		
 		if (user.getRoleId() != 0) {
 			
 			session.setAttribute(Constants.USER, user);
-			logger.info("User logged in is: '{}' with name: '{}' from the IP: '{}'",
-					user.getUserId(), user.getFullName(), request.getRemoteAddr());
 			return "redirect:/menu/"+user.getAppId();
 			
 		} else {
@@ -87,7 +90,7 @@ public class LoginController {
 	}
 	
 	//@DevProfile
-	@RequestMapping(value="/auth1",method=RequestMethod.GET)
+	/*@RequestMapping(value="/auth1",method=RequestMethod.GET)
 	public String getUserDetails1 (HttpSession session) {
 		
 		User user = new User();
@@ -98,7 +101,7 @@ public class LoginController {
 		session.setAttribute(Constants.USER, user);
 		
 		return "redirect:/home";
-	}
+	}*/
 	
 	@RequestMapping(value="/menu/{appId}",method=RequestMethod.GET)
 	public String getMenu (@PathVariable int appId, HttpSession session) {

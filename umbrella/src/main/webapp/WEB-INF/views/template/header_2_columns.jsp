@@ -2,6 +2,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sform" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <html lang="en" data-textdirection="ltr" class="loading">
 <head>
@@ -118,6 +119,26 @@
 									class="dropdown-item"><i class="flag-icon flag-icon-om"></i>
 									Arabic</a>
 							</div></li>
+								
+						<%-- <li class="dropdown dropdown-language nav-item">
+							<a id="dropdown-flag" href="#" data-toggle="dropdown"
+								aria-haspopup="true" aria-expanded="false"
+								class="dropdown-toggle nav-link">
+								<c:if test="${theme=='light'}">
+									<i class="icon-check2 icon-bg-circle bg-grey bg-accent-3"></i> <span
+										class="selected-language">Light Theme</span>
+								</c:if>
+								<c:if test="${theme=='dark'}">
+									<i class="icon-check2 icon-bg-circle bg-black bg-accent-3"></i> <span
+										class="selected-language">Dark Theme</span>
+								</c:if>
+							</a>
+							<div aria-labelledby="dropdown-flag" class="dropdown-menu">
+								<a href="/umbrella/theme/light" class="dropdown-item">
+									<i class="icon-check2 icon-bg-circle bg-grey bg-accent-3"></i> Light Theme</a>
+								<a href="/umbrella/theme/dark" class="dropdown-item">
+									<i class="icon-check2 icon-bg-circle bg-black bg-accent-3"></i> Dark Theme</a>
+							</div></li> --%>
 
 						<li class="dropdown dropdown-notification nav-item"><a
 							href="#" data-toggle="dropdown" class="nav-link nav-link-label"><i
@@ -165,11 +186,11 @@
 									<i class="icon-check2 icon-bg-circle bg-black bg-accent-3"></i> Dark Theme</a>
 								</c:if>
                   				<div class="dropdown-divider"></div>
-                  					<c:forEach var="app" items="${appList}">
-                  						<a href="/umbrella/menu/${app.id}" class="dropdown-item">
-                  							<i class="${app.value} icon-bg-circle bg-blue bg-accent-3"></i> ${app.name}</a>
-                  						<div class="dropdown-divider"></div>
-                  					</c:forEach>
+               					<c:forEach var="app" items="${appList}">
+               						<a href="/umbrella/menu/${app.id}" class="dropdown-item">
+               							<i class="${app.value} icon-bg-circle bg-blue bg-accent-3"></i> ${app.name}</a>
+               						<div class="dropdown-divider"></div>
+               					</c:forEach>
 								<sform:form name="headerform" action="/umbrella/perform_logout"
 									method="POST">
 									<a href="#" onclick="logout()" class="dropdown-item"><i
